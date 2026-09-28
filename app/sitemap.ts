@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { regionData } from '@/lib/regions';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://gis-massage.netlify.app';
+  const baseUrl = 'https://barohealing.netlify.app';
   const lastModified = new Date();
 
   // 1. 메인 홈 페이지
@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // 2. 상단 카테고리 메인 페이지
+  // 2. 상단 카테고리 메인 페이지 (정비된 클린 메뉴 경로 반영)
   const categories = ['services', 'prices', 'travel', 'places', 'reviews'];
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((route) => ({
     url: `${baseUrl}/${route}`,
@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 4. 서울, 경기, 인천 지역 및 구·동·샵 상세 구조 전체 순회 매핑
   for (const [cityKey, regInfo] of Object.entries(regionData)) {
-    // 시/도 단위 페이지 (/seoul, /gyeonggi 등)
+    // 시/도 단위 페이지 (/seoul, /gyeonggi, /incheon)
     allRoutes.push({
       url: `${baseUrl}/${cityKey}`,
       lastModified,
@@ -45,8 +45,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     });
 
+    // 시/도 단위 샵 상세 페이지 (/seoul/shop/1 ~ 5)
+    for (const sId of shopIds) {
+      allRoutes.push({
+        url: `${baseUrl}/${cityKey}/shop/${sId}`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    }
+
     for (const [districtKey, distInfo] of Object.entries(regInfo.districts)) {
-      // 구/시/군 단위 페이지 (/seoul/jongno 등)
+      // 구/시/군 단위 페이지 (/seoul/gangnam 등)
       allRoutes.push({
         url: `${baseUrl}/${cityKey}/${districtKey}`,
         lastModified,
@@ -54,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       });
 
-      // 구 단위 샵 상세 페이지 (/seoul/jongno/shop/1 ~ 5)
+      // 구 단위 샵 상세 페이지 (/seoul/gangnam/shop/1 ~ 5)
       for (const sId of shopIds) {
         allRoutes.push({
           url: `${baseUrl}/${cityKey}/${districtKey}/shop/${sId}`,
@@ -69,7 +79,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         for (const dong of distInfo.dongs) {
           const encodedDong = encodeURIComponent(dong);
 
-          // 동 단위 페이지 (/seoul/jongno/청운동)
+          // 동 단위 페이지 (/seoul/gangnam/역삼1동)
           allRoutes.push({
             url: `${baseUrl}/${cityKey}/${districtKey}/${encodedDong}`,
             lastModified,
@@ -77,7 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.85,
           });
 
-          // 동 단위 하위 샵 상세 페이지 (/seoul/jongno/청운동/shop/1 ~ 5)
+          // 동 단위 하위 샵 상세 페이지 (/seoul/gangnam/역삼1동/shop/1 ~ 5)
           for (const sId of shopIds) {
             allRoutes.push({
               url: `${baseUrl}/${cityKey}/${districtKey}/${encodedDong}/shop/${sId}`,

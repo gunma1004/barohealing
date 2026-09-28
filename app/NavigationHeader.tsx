@@ -14,11 +14,11 @@ export default function NavigationHeader() {
         {/* 로고 영역 */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="w-9 h-9 bg-sky-600 rounded-xl flex items-center justify-center text-white font-black text-sm shadow-sm group-hover:scale-105 transition-transform">
-            GIS
+            BH
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-black tracking-tight text-slate-900 leading-none">
-              기인서테라피 <span className="text-xs text-sky-600 font-semibold tracking-normal">GIS Massage</span>
+              바로힐링 <span className="text-xs text-sky-600 font-semibold tracking-normal">Baro Wellness</span>
             </span>
           </div>
         </Link>
@@ -33,17 +33,17 @@ export default function NavigationHeader() {
 
           {/* 2. 코스 & 가격 */}
           <Link href="/prices" className="hover:text-sky-600 transition-colors">
-            코스&가격
+            이용 안내
           </Link>
 
-          {/* 3. 힐링 여행지 */}
+          {/* 3. 힐링 여행지 -> 홈 케어 안내 */}
           <Link href="/travel" className="hover:text-sky-600 transition-colors">
-            지역 힐링스팟
+            홈 케어 안내
           </Link>
 
-          {/* 4. 맛집 & 숙소 */}
+          {/* 4. 맛집 & 숙소 -> 제휴 파트너 */}
           <Link href="/places" className="hover:text-sky-600 transition-colors">
-            주변 제휴명소
+            제휴 파트너
           </Link>
 
           {/* 5. 지역별 안내 (드롭다운) */}
@@ -53,7 +53,7 @@ export default function NavigationHeader() {
             onMouseLeave={() => setIsRegionOpen(false)}
           >
             <button className="hover:text-sky-600 transition-colors flex items-center gap-1 text-xs font-bold text-slate-600">
-              지역별 테라피
+              지역별 방문케어
               <span className="text-[10px] text-sky-600">▼</span>
             </button>
 
@@ -74,7 +74,7 @@ export default function NavigationHeader() {
 
           {/* 6. 고객 후기 */}
           <Link href="/reviews" className="text-sky-600 font-extrabold hover:text-sky-700 transition-colors flex items-center gap-1 bg-sky-50 px-3 py-1.5 rounded-xl border border-sky-100">
-            <span>⭐</span> 생생후기
+            <span>⭐</span> 고객 후기
           </Link>
 
         </nav>
@@ -85,7 +85,7 @@ export default function NavigationHeader() {
             href="/seoul/gangnam/yeoksam/shop/1"
             className="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-sm transition-all active:scale-95"
           >
-            📞 빠른 제휴/예약
+            📞 빠른 상담/예약
           </Link>
 
           {/* 모바일 햄버거 메뉴 버튼 */}
@@ -120,7 +120,7 @@ export default function NavigationHeader() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-2 px-3 rounded-lg hover:bg-slate-100 hover:text-sky-600"
           >
-            코스&가격
+            이용 안내
           </Link>
           <div className="py-2 px-3 rounded-lg bg-slate-50 space-y-1">
             <span className="text-slate-400 text-[11px]">지역별 바로가기</span>
@@ -153,7 +153,7 @@ export default function NavigationHeader() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-2 px-3 rounded-lg text-sky-600 bg-sky-50 border border-sky-100"
           >
-            ⭐ 생생후기 보러가기
+            ⭐ 고객 후기 보러가기
           </Link>
         </div>
       )}

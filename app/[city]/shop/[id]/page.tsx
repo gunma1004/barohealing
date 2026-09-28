@@ -8,35 +8,55 @@ interface PageProps {
   }>;
 }
 
-const SITE_URL = "https://gis-massage.netlify.app";
+const SITE_URL = "https://barohealing.netlify.app";
+const SITE_NAME = "바로힐링";
 
-// 🌟 1단: '출장'과 '마사지'가 연달아 붙지 않는 수식어 패턴 풀
-const shopActionModifiers = [
-  '릴렉스 마사지·홈타이', '소프트스웨디시 마사지·홈타이', '아로마케어 마사지·홈타이',
-  '감성힐링 마사지·홈타이', '프리미엄 마사지·홈타이', '바디케어 마사지·홈타이',
-  '딥티슈이완 마사지·홈타이', '전신힐링 마사지·홈타이', '맞춤형케어 마사지·홈타이',
-  '안심방문 마사지·홈타이', 'VIP스웨디시 마사지·홈타이', '명품테라피 마사지·홈타이',
-  '소프트감성 마사지·홈타이', '림프순환 마사지·홈타이', '포근한힐링 마사지·홈타이',
-  '체형맞춤 마사지·홈타이', '타이스트레칭 마사지·홈타이', '스페셜바디 마사지·홈타이'
+// 🌟 1단: '출장' + 코스 + '마사지'를 완전히 띄어 쓴 수식어 패턴 (40종)
+const spacedServicePatterns = [
+  "스웨디시 마사지", "릴렉스 마사지", "출장 아로마 마사지", "출장 바디케어 마사지",
+  "타이 마사지", "딥티슈 마사지", "출장 프리미엄 마사지", "감성힐링 마사지",
+  "맞춤형 마사지", "전신케어 마사지", "출장 홈 테라피 마사지", "출장 힐링케어 마사지",
+  "에스테틱 마사지", "림프순환 마사지", "출장 시그니처 마사지", "스트레칭 마사지",
+  "피로회복 마사지", "호텔식 마사지", "출장 프라이빗 마사지", "출장 웰니스 마사지",
+  "힐링 테라피 마사지", "소프트스웨디시 마사지", "딥릴렉스 마사지", "출장 오일케어 마사지",
+  "전신이완 마사지", "활력케어 마사지", "체형맞춤 마사지", "출장 건식타이 마사지",
+  "딥케어 마사지", "명품힐링 마사지", "출장 안심방문 마사지", "출장 스페셜케어 마사지",
+  "집중관리 마사지", "감성테라피 마사지", "출장 소프트터치 마사지", "출장 근육이완 마사지",
+  "밸런스케어 마사지", "릴렉세이션 마사지", "출장 베이직힐링 마사지", "출장 VIP케어 마사지"
 ];
 
-// 🌟 2단: 광역 단위 안마 예약 키워드 풀
-const cityBookingActions = [
-  '전지역 안마 예약', '실시간 안마 방문예약', '테라피 코스 예약', '힐링 안마예약',
-  '바디케어 추천예약', '웰니스 안마 안내', '구·동 안마 방문안내', '스웨디시 통합예약'
+// 🌟 2단: 서브 안내 및 안심 소구 패턴 (10종)
+const bookingPatterns = [
+  "100% 안심 후불제 예약", "투명 정찰제 실시간 매칭", "검증된 테라피스트 방문",
+  "전지역 빠른 방문 상담", "선입금 없는 프라이빗 케어", "당일 신속 홈케어 안내",
+  "정직한 정찰제 안심 예약", "1:1 프라이빗 맞춤 안내", "선입금 ZERO 현장 결제", "피로회복 힐링 솔루션"
 ];
 
-// 🌟 디스크립션 가격 및 소구점 조합 풀
-const priceHooks = [
-  '건식 6만원부터 심야할증 없이 방문합니다.',
-  '건식 7만원부터 심야할증 없이 방문합니다.',
-  '스웨디시 8만원부터 추가비용 없이 방문합니다.',
-  '아로마 7만원부터 합리적인 정찰제로 방문합니다.',
-  '타이 6만원부터 현장 결제 후불제로 방문합니다.'
+// 🌟 타이틀 문장 구조 다변화 템플릿 (5종)
+const titleStructureTemplates = [
+  (city: string, shop: string, srv: string, book: string) => `${city} 전지역 ${shop} ${srv} | ${book} - ${SITE_NAME}`,
+  (city: string, shop: string, srv: string, book: string) => `[${shop}] ${city} 프리미엄 ${srv} 안내 (${book}) | ${SITE_NAME}`,
+  (city: string, shop: string, srv: string, book: string) => `${city} ${srv} 1등 제휴처 ${shop} | ${book}`,
+  (city: string, shop: string, srv: string, book: string) => `${city} ${shop} - 전지역 ${srv} 전문 코스 안내 (${book})`,
+  (city: string, shop: string, srv: string, book: string) => `${shop} (${city} 전역) 맞춤형 ${srv} | ${book} - ${SITE_NAME}`
 ];
 
-// 🌟 정확한 샵별 코스 및 가격 정보 반영 (5개 제휴점 전체)
-const shopData: Record<string, {
+// 🌟 디스크립션 문장 구성 다변화 템플릿 (도시명 바로 뒤 '출장마사지' 배치 10종)
+const descTemplates = [
+  (city: string, shop: string, minPrice: string) => `${city} 출장 마사지 공식 파트너 ${shop}! 최저 ${minPrice}부터 시작하는 투명 정찰제와 100% 안심 현장 후불 결제로 편안하게 이용하세요.`,
+  (city: string, shop: string) => `${city} 출장 마사지 신뢰의 이름 바로힐링. ${shop}의 엄선된 전문 테라피스트가 뭉친 전신 근육과 피로를 부드럽게 이완해 드립니다.`,
+  (city: string, shop: string) => `${city} 출장 마사지 빠른 방문 안내. ${shop}은 선입금이나 예약금 요구 없이 계신 곳까지 신속하게 방문하여 맞춤형 힐링을 선사합니다.`,
+  (city: string, shop: string, minPrice: string) => `${city} 출장 마사지 예약 플랫폼. ${shop}의 대표 코스를 ${minPrice}부터 부담 없는 정찰제로 만나보실 수 있습니다.`,
+  (city: string, shop: string) => `${city} 출장 마사지 추천 제휴점 ${shop}! 쾌적한 1:1 프라이빗 케어와 철저한 위생 관리로 호텔 스파급 휴식을 내 집에서 경험해 보세요.`,
+  (city: string, shop: string) => `${city} 출장 마사지 안심 매칭 서비스. 사기 걱정 없는 100% 현장 결제 원칙을 준수하는 ${shop}의 정규 코스와 요금을 지금 확인하세요.`,
+  (city: string, shop: string) => `${city} 출장 마사지 전문 힐링 가이드. 일상과 야근으로 누적된 피로를 ${shop}만의 프리미엄 바디케어 테크닉으로 확실하게 풀어드립니다.`,
+  (city: string, shop: string, minPrice: string) => `${city} 출장 마사지 투명 정찰제 안내. ${shop}의 스웨디시 및 아로마 코스를 ${minPrice}부터 현장 결제로 안전하게 누려보세요.`,
+  (city: string, shop: string) => `${city} 출장 마사지 고객 만족도 우수 제휴처 ${shop}. 친절한 상담과 숙련된 테라피스트의 손길로 차원이 다른 휴식을 선물합니다.`,
+  (city: string, shop: string) => `${city} 출장 마사지 실시간 상담 및 예약. ${shop}과 함께 복잡한 절차 없이 간편하고 안전하게 최고의 홈케어를 시작해 보세요.`
+];
+
+// 🌟 5개 공식 제휴 업체 원본 데이터
+const shopDatabase: Record<string, {
   name: string;
   phone: string;
   badge: string;
@@ -84,7 +104,7 @@ const shopData: Record<string, {
     phone: "0507-1280-3303",
     badge: "재방문율 최우수",
     image: "/shop2.jpg",
-    desc: "최고급 천연 오일을 활용한 감성 아로마 전신 바디케어 프로그램 및 스웨디시 제휴 샵.",
+    desc: "최고급 천연 오일을 활용한 감성 아로마 전신 바디케어 프로그램 및 제휴 샵.",
     courses: [
       {
         category: "아로디시 코스",
@@ -121,11 +141,11 @@ const shopData: Record<string, {
     phone: "0507-1280-3193",
     badge: "만족도 1위 추천",
     image: "/shop3.jpg",
-    desc: "재방문율 1위 만족도! 정통 타이 마사지부터 올인원 VIP 코스까지 체계적인 프로그램.",
+    desc: "재방문율 1위 만족도! 정통 힐링 테라피부터 올인원 VIP 코스까지 체계적인 프로그램.",
     courses: [
       {
         category: "건식 코스",
-        desc: "뭉치고 굳은 전신 근육을 시원하게 풀어주는 정통 스트레칭 마사지.",
+        desc: "뭉치고 굳은 전신 근육을 시원하게 풀어주는 정통 스트레칭 케어.",
         items: [
           { time: "60분", price: "60,000원" },
           { time: "90분", price: "80,000원", recommend: true },
@@ -306,49 +326,55 @@ const shopData: Record<string, {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const { city, id } = resolvedParams;
-  const shop = shopData[id] || shopData["1"];
+  const shop = shopDatabase[id] || shopDatabase["1"];
   
-  const cityName = city.toUpperCase() === "SEOUL" ? "서울" : city.toUpperCase() === "GYEONGGI" ? "경기" : "인천";
+  const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
 
-  // 🌟 순차적 인덱스 계산 (shopData[id] 반영 -> 1~5번 샵 간 고유 조합 보장)
-  const seedString = `${cityName}-${id}-giinseo-city-shop-seo`;
+  // 고유 해시 계산
+  const seedString = `${cityName}-${id}-${shop.name}-city-shop-advanced-seo`;
   const charSum = seedString.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
-  const part1Idx = charSum % shopActionModifiers.length;
-  const part2Idx = (charSum * 3) % cityBookingActions.length;
-  const priceIdx = (charSum * 7) % priceHooks.length;
+  const structIdx = charSum % titleStructureTemplates.length;
+  const serviceIdx = (charSum * 3) % spacedServicePatterns.length;
+  const bookingIdx = (charSum * 5) % bookingPatterns.length;
+  const descIdx = (charSum * 7) % descTemplates.length;
 
-  // 💡 [서울 출장 릴렉스 마사지·홈타이 | 서울 전지역 안마 예약 | 기인서테라피] 형식 (약 45~50자)
-  const formattedTitle = `${cityName} 출장 ${shopActionModifiers[part1Idx]} | ${cityName} ${cityBookingActions[part2Idx]} | 기인서테라피`;
+  const minPrice = shop.courses[0]?.items[0]?.price || "합리적인 가격";
+
+  // 다변화된 템플릿으로 최종 타이틀 및 설명 생성
+  const finalTitle = titleStructureTemplates[structIdx](
+    cityName,
+    shop.name,
+    spacedServicePatterns[serviceIdx],
+    bookingPatterns[bookingIdx]
+  );
   
-  // 💡 [서울 전지역 출장 마사지·홈타이·안마. 검증된 전문 관리사 100% 후불제. 건식 7만원부터 심야할증 없이 방문합니다.] 형식
-  const formattedDesc = `${cityName} 전지역 출장 마사지·홈타이·안마. 검증된 전문 관리사 100% 후불제. ${priceHooks[priceIdx]}`;
+  const finalDescription = descTemplates[descIdx](cityName, shop.name, minPrice);
 
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      absolute: formattedTitle,
+      absolute: finalTitle,
     },
-    description: formattedDesc,
+    description: finalDescription,
     alternates: {
       canonical: `${SITE_URL}/${city}/shop/${id}`,
     },
     keywords: [
-      `${cityName} 마사지`,
+      `${cityName} ${shop.name}`,
+      `${cityName} ${spacedServicePatterns[serviceIdx]}`,
       `${cityName} 출장마사지`,
-      `${cityName} 홈타이`,
-      `${cityName} 안마`,
-      `${cityName} 아로마마사지`,
-      `${cityName} 스웨디시`,
-      "기인서테라피"
+      `${cityName} 홈케어`,
+      SITE_NAME
     ],
     openGraph: {
-      title: formattedTitle,
-      description: formattedDesc,
+      title: finalTitle,
+      description: finalDescription,
       url: `${SITE_URL}/${city}/shop/${id}`,
+      siteName: `${SITE_NAME} (Baro Wellness)`,
       locale: "ko_KR",
       type: "website",
-      images: [{ url: shop.image, width: 800, height: 600, alt: `${cityName} 마사지` }],
+      images: [{ url: shop.image, width: 800, height: 600, alt: `${cityName} ${shop.name}` }],
     },
   };
 }
@@ -356,38 +382,120 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CityShopDetailPage({ params }: PageProps) {
   const resolvedParams = await params;
   const { city, id } = resolvedParams;
-  const shop = shopData[id] || shopData["1"];
+  const shop = shopDatabase[id] || shopDatabase["1"];
 
-  const cityName = city.toUpperCase() === "SEOUL" ? "서울" : city.toUpperCase() === "GYEONGGI" ? "경기" : "인천";
-  const displayShopTitle = `${cityName} 전지역 출장 방문 마사지 - ${shop.name}`;
+  const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
+  const displayShopTitle = `${cityName} 전지역 안심 방문 케어 - ${shop.name}`;
+
+  const allShopsList = Object.entries(shopDatabase).map(([sId, sVal]) => ({
+    id: sId,
+    name: sVal.name,
+    badge: sVal.badge,
+    desc: sVal.desc,
+    phone: sVal.phone,
+    image: sVal.image,
+    active: sId === id
+  }));
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": displayShopTitle,
+    "description": shop.desc,
+    "telephone": shop.phone,
+    "url": `${SITE_URL}/${city}/shop/${id}`,
+    "image": `${SITE_URL}${shop.image}`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": cityName,
+      "addressCountry": "KR"
+    },
+    "priceRange": "$$"
+  };
 
   return (
     <div className="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40 px-4 py-3 shadow-sm">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold text-sky-600">기인서테라피</Link>
+          <Link href="/" className="text-xl font-bold text-sky-600">{SITE_NAME}</Link>
           <Link href={`/${city}`} className="text-xs font-bold text-sky-600 bg-sky-50 px-3 py-1.5 rounded-xl border border-sky-100 hover:bg-sky-600 hover:text-white transition-all">
-            &larr; {cityName} 목록으로
+            &larr; {cityName} 전체보기
           </Link>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-8 w-full flex-1 space-y-8">
+        
+        {/* 상단 현재 선택된 샵 정보 카드 */}
         <section className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
           <div className="relative h-64 md:h-80 w-full overflow-hidden">
             <img src={shop.image} alt={displayShopTitle} className="w-full h-full object-cover filter brightness-[0.85]" />
             <span className="absolute top-4 left-4 bg-sky-600 text-white text-xs font-black px-3.5 py-1.5 rounded-full shadow-md">✨ {shop.badge}</span>
           </div>
           <div className="p-6 md:p-8 space-y-4 -mt-8 relative z-10 bg-white rounded-t-3xl border-t border-slate-100">
+            <span className="text-xs font-bold text-sky-600 bg-sky-50 px-3 py-1 rounded-lg border border-sky-100">
+              📍 {cityName} 전지역 제휴처
+            </span>
             <h1 className="text-xl md:text-3xl font-black text-slate-900 leading-tight">{displayShopTitle}</h1>
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">{shop.desc}</p>
           </div>
         </section>
 
+        {/* 전체 제휴 샵 목록 보기 카드 섹션 */}
+        <section className="bg-white border border-slate-200 p-6 rounded-3xl space-y-4 shadow-sm">
+          <div className="text-center">
+            <span className="text-sky-600 text-xs font-bold tracking-widest uppercase">PARTNER SHOPS IN {cityName}</span>
+            <h3 className="text-base md:text-xl font-black text-slate-900 mt-1">
+              ✨ {cityName} 전지역 공식 제휴처 (총 5곳)
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 gap-3">
+            {allShopsList.map((s) => (
+              <div 
+                key={s.id} 
+                className={`p-4 rounded-2xl border flex items-center justify-between gap-4 transition-all ${
+                  s.active 
+                    ? "bg-sky-50/60 border-sky-400 shadow-xs" 
+                    : "bg-slate-50 border-slate-200 hover:border-sky-300"
+                }`}
+              >
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <img src={s.image} alt={s.name} className="w-14 h-14 rounded-xl object-cover shrink-0 border border-slate-200" />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-extrabold text-sm text-slate-900 truncate">{s.name}</span>
+                      {s.active && <span className="text-[10px] bg-sky-600 text-white font-bold px-2 py-0.5 rounded-full">선택됨</span>}
+                    </div>
+                    <p className="text-[11px] text-slate-500 truncate mt-0.5">{s.desc}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={`/${city}/shop/${s.id}`}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+                      s.active
+                        ? "bg-sky-600 text-white shadow-xs"
+                        : "bg-white text-slate-700 border border-slate-200 hover:bg-sky-600 hover:text-white hover:border-sky-600"
+                    }`}
+                  >
+                    {s.active ? "안내 보기" : "샵 선택"}
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 코스 및 가격 안내 */}
         <section className="bg-white border border-slate-200 p-6 md:p-8 rounded-3xl space-y-6 shadow-sm">
           <div className="text-center">
             <span className="text-sky-600 text-xs font-bold tracking-widest uppercase">PROGRAM & PRICE</span>
-            <h2 className="text-lg md:text-2xl font-black text-slate-900 mt-1">💎 {cityName} 정규 코스 및 요금 안내</h2>
+            <h2 className="text-lg md:text-2xl font-black text-slate-900 mt-1">💎 {shop.name} 정규 코스 및 요금</h2>
           </div>
           <div className="space-y-6">
             {shop.courses.map((courseGroup, idx) => (
@@ -415,6 +523,7 @@ export default async function CityShopDetailPage({ params }: PageProps) {
         </section>
       </main>
 
+      {/* 하단 고정 예약 바 */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200 p-3 md:p-4 shadow-lg">
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-3">
           <a href={`tel:${shop.phone}`} className="flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-black py-3.5 rounded-2xl text-xs md:text-sm shadow-sm">📞 전화예약 ({shop.phone})</a>

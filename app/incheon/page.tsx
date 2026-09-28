@@ -1,20 +1,20 @@
 import Link from 'next/link';
 import type { Metadata } from "next";
 
-const SITE_URL = "https://gis-massage.netlify.app";
-const SITE_NAME = "기인서테라피";
+const SITE_URL = "https://barohealing.netlify.app";
+const SITE_NAME = "바로힐링";
 
 export const metadata: Metadata = {
-  title: `${SITE_NAME} | 인천 구·군 전체 지역별 제휴 힐링 테라피 안내`,
-  description: "인천 전 지역의 세부 동·면별 제휴 샵 정보를 편리하게 확인하세요. 기인서테라피에서 쾌적하고 신뢰할 수 있는 웰니스 프로그램을 만나보세요.",
+  title: `${SITE_NAME} | 인천 구·군 전체 출장 지역별 마사지 케어 안내`,
+  description: "인천 전 지역의 세부 동·면별 출장마사지 제휴처 정보를 편리하게 확인하세요. 바로힐링에서 쾌적하고 신뢰할 수 있는 웰니스 프로그램을 만나보세요.",
   alternates: {
     canonical: `${SITE_URL}/incheon`,
   },
   openGraph: {
-    title: `${SITE_NAME} | 인천 구·군 전체 지역별 제휴 힐링 테라피`,
-    description: "인천 전 지역의 세부 동·면별 제휴 정보를 편리하게 확인하세요.",
+    title: `${SITE_NAME} | 인천 구·군 전체 출장 지역별 마사지 파트너`,
+    description: "인천 전 지역의 세부 동·면별 프리미엄 출장마사지 제휴처 정보를 편리하게 확인하세요.",
     url: `${SITE_URL}/incheon`,
-    siteName: `${SITE_NAME} (GIS Massage)`,
+    siteName: `${SITE_NAME} (Baro Wellness)`,
     locale: "ko_KR",
     type: "website",
   },
@@ -74,7 +74,7 @@ export default function IncheonRegionPage() {
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-sky-600">
-            기인서테라피 (GIS Massage)
+            {SITE_NAME} (Baro Wellness)
           </Link>
           <Link href="/" className="text-sm text-slate-500 hover:text-slate-800">
             &larr; 홈으로 돌아가기
@@ -86,20 +86,20 @@ export default function IncheonRegionPage() {
         <div className="max-w-6xl mx-auto flex items-center gap-2">
           <Link href="/" className="text-sky-600 font-semibold hover:underline">홈</Link>
           <span>&gt;</span>
-          <span>인천 지역 안내</span>
+          <span>인천 방문케어 안내</span>
         </div>
       </nav>
 
       <section className="max-w-6xl mx-auto py-10 px-4">
         <div className="mb-8">
           <span className="bg-sky-100 text-sky-700 text-xs font-semibold px-2.5 py-1 rounded-md mb-2 inline-block">
-            인천광역시 제휴 샵 안내
+            인천광역시 홈 테라피 제휴처 안내
           </span>
           <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-2">
-            인천 구·군 전체 지역별 프리미엄 힐링 테라피
+            인천 구·군 전체 지역별 프리미엄 방문 바디케어
           </h1>
           <p className="text-slate-600 text-sm md:text-base">
-            인천 전 지역의 세부 동·면별 제휴 정보를 편리하게 확인하세요.
+            인천 전 지역의 세부 동·면별 홈 테라피 제휴처 정보를 편리하게 확인하세요.
           </p>
         </div>
 
@@ -131,8 +131,8 @@ export default function IncheonRegionPage() {
       </section>
 
       <footer className="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-400 mt-20">
-        <p>© 2026 기인서테라피 (GIS Massage). All rights reserved.</p>
-        <p className="mt-1">도메인: https://gis-massage.netlify.app/incheon/</p>
+        <p>© {new Date().getFullYear()} {SITE_NAME} (Baro Wellness). All rights reserved.</p>
+        <p className="mt-1">공식 웹사이트: {SITE_URL}/incheon/</p>
       </footer>
     </main>
   );

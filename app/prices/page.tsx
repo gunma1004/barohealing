@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const SITE_URL = "https://gis-massage.netlify.app";
-const SITE_NAME = "기인서테라피";
+const SITE_URL = "https://barohealing.netlify.app";
+const SITE_NAME = "바로힐링";
 
 export const metadata: Metadata = {
-  title: `코스별 가격 안내 | 투명한 100% 후불 정찰제 - ${SITE_NAME}`,
-  description: "서울·경기·인천 기인서테라피 투명한 코스별 가격 안내! 릴렉스, 타이, 아로마, VIP 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
+  title: `코스별 이용 안내 | 투명한 100% 후불 정찰제 - ${SITE_NAME}`,
+  description: "서울·경기·인천 바로힐링 투명한 코스별 이용 안내! 베이직, 아로마, 프리미엄 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
   keywords: [
-    "기인서테라피 가격",
-    "테라피 가격",
-    "홈케어 요금",
-    "타이마사지 비용",
-    "아로마 테라피 요금",
-    "스웨디시 가격",
+    "바로힐링 가격",
+    "방문 바디케어 요금",
+    "홈케어 비용",
+    "웰니스 프로그램 요금",
+    "프리미엄 홈테라피",
+    "릴렉싱 케어 가격",
     "후불제 바디케어"
   ],
   alternates: {
     canonical: `${SITE_URL}/prices`,
   },
   openGraph: {
-    title: `코스별 가격 안내 | ${SITE_NAME} 투명한 후불 정찰제`,
-    description: "선입금 없는 100% 안심 후불제! 릴렉스, 타이, 아로마 맞춤 코스별 요금을 투명하게 비교해 보세요.",
+    title: `코스별 이용 안내 | ${SITE_NAME} 투명한 후불 정찰제`,
+    description: "선입금 없는 100% 안심 후불제! 베이직, 아로마, 시그니처 맞춤 코스별 요금을 투명하게 비교해 보세요.",
     url: `${SITE_URL}/prices`,
-    siteName: `${SITE_NAME} (GIS Massage)`,
+    siteName: `${SITE_NAME} (Baro Wellness)`,
     locale: "ko_KR",
     type: "website",
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         url: "/og-main.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} 코스별 가격 안내`,
+        alt: `${SITE_NAME} 코스별 이용 안내`,
       },
     ],
   },
@@ -39,35 +39,35 @@ export const metadata: Metadata = {
 
 const priceList = [
   {
-    title: "타이 건식 릴렉싱 케어",
+    title: "베이직 릴렉싱 케어",
     duration: "60분 / 90분 / 120분",
     price: "60,000원부터~",
-    desc: "전신 굳은 근육 이완 및 척추·하체 중심의 맞춤 스트레칭 프로그램",
+    desc: "전신 근육 이완 및 신체 밸런스를 맞춰주는 부드러운 기초 케어 프로그램",
     badge: "가성비 추천",
     highlight: false,
   },
   {
-    title: "프리미엄 천연 아로마 오일",
+    title: "프리미엄 아로마 케어",
     duration: "60분 / 90분 / 120분",
     price: "70,000원부터~",
-    desc: "최고급 유기농 아로마 오일을 활용한 부드러운 전신 림프 순환 케어",
+    desc: "최고급 천연 에센셜 오일을 활용한 부드러운 전신 순환 및 보습 케어",
     badge: "인기 만족도",
     highlight: false,
   },
   {
-    title: "감성 딥티슈 스웨디시 케어",
+    title: "시그니처 딥 릴렉싱 케어",
     duration: "60분 / 90분 / 120분",
     price: "90,000원부터~",
-    desc: "심신 안정과 체내 노폐물 배출을 돕는 최고급 럭셔리 VIP 테라피",
+    desc: "심신 안정과 스트레스 완화를 돕는 바로힐링만의 프리미엄 스페셜 케어",
     badge: "BEST 시그니처",
     highlight: true,
   },
   {
-    title: "베테랑 힐러 VIP 스페셜 코스",
+    title: "마스터 1:1 맞춤형 케어",
     duration: "60분 / 90분 / 120분",
     price: "140,000원부터~",
-    desc: "숙련된 테라피스트의 1:1 맞춤 전신 체형 밸런스 & 피로회복 집중 프로그램",
-    badge: "VIP 추천",
+    desc: "숙련된 전문가의 1:1 맞춤 전신 밸런스 및 피로 회복 집중 케어 프로그램",
+    badge: "스페셜 추천",
     highlight: false,
   },
 ];
@@ -83,7 +83,7 @@ export default function PricesPage() {
             TRANSPARENT PRICE POLICY
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tight">
-            {SITE_NAME} 투명한 코스별 가격 안내
+            {SITE_NAME} 투명한 코스별 이용 안내
           </h1>
           <p className="text-xs md:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
             100% 후불제 안심 예약 시스템으로 운영되며, 방문 전 일체의 선입금이나 예약금을 요구하지 않습니다.
@@ -100,7 +100,7 @@ export default function PricesPage() {
               선입금 ZERO · 100% 현장 결제 보장
             </h2>
             <p className="text-xs text-slate-600 leading-relaxed">
-              {SITE_NAME}의 모든 제휴점은 서비스 진행 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
+              {SITE_NAME}의 모든 제휴처는 서비스 진행 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
             </p>
           </div>
         </section>

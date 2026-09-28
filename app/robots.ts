@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://gis-massage.netlify.app';
+  const baseUrl = 'https://barohealing.netlify.app';
 
   return {
     rules: {
