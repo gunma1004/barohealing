@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   // 👇 바로힐링 사이트용 네이버 소유확인 코드를 새로 발급받아 아래에 넣어주세요 👇
   verification: {
     other: {
-      // 'naver-site-verification': '0ad4e1b00a0ad4816c2def8bdc237dee7d7f5314',
+      "naver-site-verification": "0ad4e1b00a0ad4816c2def8bdc237dee7d7f5314",
     },
   },
   openGraph: {

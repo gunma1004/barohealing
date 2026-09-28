@@ -14,13 +14,20 @@ interface PageProps {
 const SITE_URL = "https://barohealing.netlify.app";
 const SITE_NAME = "바로힐링";
 
-// 🌟 안전 디코딩 함수 (이중 인코딩 및 특수문자 완벽 복원)
+// 🌟 % 기호가 완전히 사라질 때까지 반복 디코딩하는 안전 함수
 function safeDecode(val: string): string {
+  if (!val) return "";
+  let decoded = val;
   try {
-    return decodeURIComponent(val);
+    while (decoded.includes("%")) {
+      const next = decodeURIComponent(decoded);
+      if (next === decoded) break;
+      decoded = next;
+    }
   } catch {
-    return val;
+    return decoded;
   }
+  return decoded;
 }
 
 // 🌟 1단: '출장' + 코스 + '마사지'를 완전히 띄어 쓴 수식어 패턴 (40종)
@@ -323,9 +330,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
   const districtName = districtInfo ? districtInfo.name : district;
-  const dongName = safeDecode(dong);
-  const shop = shopDatabase[id] || shopDatabase["1"];
   
+  // 반복 디코딩 및 regionData 원본 매핑
+  let dongName = safeDecode(dong);
+  if (districtInfo?.dongs) {
+    const matched = districtInfo.dongs.find((d) => d === dongName || safeDecode(d) === dongName);
+    if (matched) dongName = matched;
+  }
+
+  const shop = shopDatabase[id] || shopDatabase["1"];
   const locationKeyword = `${cityName} ${districtName} ${dongName}`;
 
   const seedString = `${locationKeyword}-${id}-baro-dong-shop-pattern-v2`;
@@ -375,9 +388,21 @@ export default async function DongShopDetailPage({ params }: PageProps) {
   
   const cityName = city.toLowerCase() === "seoul" ? "서울" : city.toLowerCase() === "incheon" ? "인천" : "경기";
   const districtName = districtInfo ? districtInfo.name : district;
-  const dongName = safeDecode(dong);
-  const shop = shopDatabase[id] || shopDatabase["1"];
 
+  // 1. 반복 디코딩 수행
+  let dongName = safeDecode(dong);
+
+  // 2. regionData 원본 데이터와 1:1 대조 보정
+  if (districtInfo?.dongs) {
+    const matchedDong = districtInfo.dongs.find(
+      (d) => d === dongName || safeDecode(d) === dongName
+    );
+    if (matchedDong) {
+      dongName = matchedDong;
+    }
+  }
+
+  const shop = shopDatabase[id] || shopDatabase["1"];
   const fullLocation = `${cityName} ${districtName} ${dongName}`;
   const displayShopTitle = `${fullLocation} 안심 방문 케어 - ${shop.name}`;
 
